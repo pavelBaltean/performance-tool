@@ -1,0 +1,44 @@
+const request = require('request');
+ 
+function move(){
+   let count=0;
+   let id = setInterval(reqLink,1000);
+   function reqLink(){
+     if(count ==3){
+       clearInterval(id);
+     }else{
+       count++;
+    request.get({
+      url : 'https://nodejs.dev/making-http-requests-with-nodejs',
+      time : true
+    },function(err, response){
+      console.log('Request time in ms', response.elapsedTime);
+      console.log('Status code: ',response.statusCode);
+      console.log('Status Message:',response.statusMessage);
+      console.log(" ");
+    
+    });
+  }
+   }
+}
+ move();
+
+
+
+let reqOnLink =() => {
+  request.get({
+    url : 'https://nodejs.dev/making-http-requests-with-nodejs',
+    time : true
+  },function(err, response){
+    console.log('Request time in ms', response.elapsedTime);
+    console.log('Status code: ',response.statusCode);
+    console.log('Status Message:',response.statusMessage);
+    console.log(" ");
+  
+    // for(var item in response.headers) {
+    //   console.log(item + ": " + response.headers[item]);
+    // }
+
+    
+  });
+};
