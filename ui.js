@@ -5,6 +5,7 @@ let bodyParser = require('body-parser');
 const mysql = require("mysql2");
 let requestOnLink=require('./fackingWork.js');
 
+
 server.listen(3000);
 
 
@@ -30,17 +31,17 @@ app.get('/run',function(req,res){
     url=request.body.url;
     latency=request.body.latency;
     duration=request.body.duration;
-    stopButton=request.body.stop;
-    console.log(stopButton);
-  console.log(typeof stopButton);
-
 // повторить с интервалом 2 секунды
-
     let timerId = setInterval(() =>  requestOnLink(url), latency*1000);
 // остановить вывод через 5 секунд
 
-  setTimeout(() => { clearInterval(timerId); console.log("STOP"); }, duration*1000);
+  setTimeout(() => { clearInterval(timerId); console.log("STOP");
+  let requestOnLink=require('./db.js');//надо убрать
+ }, duration*1000);
  
+ 
+   //получение бд
+
    // response.sendFile(__dirname + '/sucRegister.html'); типо график
   });
 //interface end

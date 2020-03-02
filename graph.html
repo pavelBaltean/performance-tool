@@ -2,13 +2,14 @@
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    
 
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
         let data = google.visualization.arrayToDataTable([
-          ['Year', 'Passed', 'Failed'],
+          ['Time', 'Passed', 'Failed'],
           ['2004',  2000,      400],
           ['2005',  1170,      460],
           ['2006',  660,       1120],

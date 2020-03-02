@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+        <button onclick="loadPhones()" id="button">Отправить</button>
+    
+        <script>
+         
+          function loadPhones() {
+            let response = await fetch("http://localhost:3000/run");
+
+             if (response.ok) { // если HTTP-статус в диапазоне 200-299
+  // получаем тело ответа (см. про этот метод ниже)
+              let json = await response.json();
+             } else {
+              alert("Ошибка HTTP: " + response.status);
+             }
+              }
+              
+        </script>
+</body>
+<html>
