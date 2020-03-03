@@ -32,7 +32,7 @@ function reqOnLinkSaveDB(reqURL){
      console.log('Status code: ',response.statusCode);
      console.log('Status Message:',response.statusMessage);
   
-     const user=[ reqURL+"",response.elapsedTime+"",response.statusCode+"",response.statusMessage+""];
+     const user=[ reqURL+"",response.statusCode,response.statusMessage+"",response.elapsedTime];
      const sql="INSERT INTO user (url,statusCode,statusMessage,responseTime) VALUES (?,?,?,?)";
      
      connection.query(sql, user, function(err, results) {
@@ -44,12 +44,15 @@ function reqOnLinkSaveDB(reqURL){
 }
 
 function getDataBase(){
-  connection.query("SELECT * FROM user",
-  function(err, results, fields) { 
-    console.log(err);
-    console.log(results);
-   });
-
+  connection.query('SELECT * FROM user', (err,rows) => {
+    if(err) throw err;
+  
+    console.log(rows[0].url);
+    
+    // rows.forEach( (row) => {
+    //   console.log(`${row.url} lives in ${row.statusMessage}`);
+    // });
+  });
   }
 
 module.exports={

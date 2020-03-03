@@ -37,8 +37,6 @@ app.get('/run',function(req,res){
   
 
 app.get('/getDataBase',function(req,res){
-  console.log("getDataBase works");
-
   const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -54,13 +52,22 @@ app.get('/getDataBase',function(req,res){
       console.log("Database is connected");
     }
   });
-  //правильно закрыть базу
-  connection.query("SELECT * FROM user",
-  function(err, results, fields) { 
-    console.log(err);
-    res.json(results);
-    console.log(results);
-   });
+
+  console.log("getDataBase works");
+  connection.query('SELECT * FROM user', (err,rows) => {
+
+    if(err) throw err;
+
+    //console.log(rows[0].responseTime);
+    // rows.forEach( (row) => {
+    //   let resTime=`${row.responseTime}`;
+    //   res.json(resTime);
+    //   console.log(resTime);
+    // });
+
+    res.json(rows);
+  });
+
 
 });
 

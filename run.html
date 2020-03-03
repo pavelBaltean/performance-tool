@@ -21,10 +21,9 @@
 
       sendRequest('GET', url)
         .then(data => {
-          jsonData=data;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
-          console.log(jsonData);
-
+          jsonData=data[0].statusCode;
+        
           //deleteS
           google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
@@ -33,7 +32,7 @@
 
             let data = google.visualization.arrayToDataTable([
              ['Task', 'Duration'],
-             ['Passed',     11],
+             ['Passed',     jsonData],
              ['Failed',    7]
              ]);
 
