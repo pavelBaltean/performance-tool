@@ -9,8 +9,9 @@ server.listen(3000);
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-app.get('/run',function(req,res){
+app.get('/',function(req,res){
     res.sendFile(__dirname + '/run.html');
+  
   });
   
   app.post("/run", urlencodedParser, function (request, response) {
@@ -55,7 +56,7 @@ app.get('/getDataBase',function(req,res){
 
   console.log("getDataBase works");
   connection.query('SELECT * FROM user', (err,rows) => {
-
+    
     if(err) throw err;
 
     //console.log(rows[0].responseTime);
@@ -64,7 +65,6 @@ app.get('/getDataBase',function(req,res){
     //   res.json(resTime);
     //   console.log(resTime);
     // });
-
     res.json(rows);
   });
 

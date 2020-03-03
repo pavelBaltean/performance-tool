@@ -28,11 +28,26 @@ function reqOnLinkSaveDB(reqURL){
      url : reqURL,
      time : true
    },function(err, response){
-     console.log('Request time in ms', response.elapsedTime);
-     console.log('Status code: ',response.statusCode);
-     console.log('Status Message:',response.statusMessage);
+      let resElapsedTime;
+      let resStatusCode;
+      let resStatusMessage;
+      
+      if(err){
+        resElapsedTime=0;
+        resStatusCode=404;
+        resStatusMessage="Not Found";
+       }else{
+        resElapsedTime= response.elapsedTime;
+        resStatusCode=response.statusCode;
+        resStatusMessage=response.statusMessage;
+       }
+
+     console.log('Request time in ms', resElapsedTime);
+     console.log('Status code: ',resStatusCode);
+     console.log('Status Message:',resStatusMessage);
+     
   
-     const user=[ reqURL+"",response.statusCode,response.statusMessage+"",response.elapsedTime];
+     const user=[ reqURL+"",resStatusCode,resStatusMessage+"",resElapsedTime];
      const sql="INSERT INTO user (url,statusCode,statusMessage,responseTime) VALUES (?,?,?,?)";
      
      connection.query(sql, user, function(err, results) {

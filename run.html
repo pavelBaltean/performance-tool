@@ -21,9 +21,23 @@
 
       sendRequest('GET', url)
         .then(data => {
+          let idDataPassed;
+          let idDataFailed;
+          let countP=0;
+          let countF=0;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
-          jsonData=data[0].statusCode;
-        
+          jsonData=data;
+          
+
+          jsonData.forEach( (jsonData) => {
+            idDataPassed=`${jsonData.statusCode}`;
+            
+            if(idDataPassed==200){ 
+              countP++;
+            }else{
+              countF++;
+            }
+
           //deleteS
           google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
@@ -32,8 +46,8 @@
 
             let data = google.visualization.arrayToDataTable([
              ['Task', 'Duration'],
-             ['Passed',     jsonData],
-             ['Failed',    7]
+             ['Passed',     countP],
+             ['Failed',    countF]
              ]);
 
            let options = {
@@ -44,6 +58,7 @@
 
            chart.draw(data, options);
           }
+        });
          //deleteE
       } )
         .catch(err => console.log(err))
