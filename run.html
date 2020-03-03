@@ -1,37 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-    
+       let jsonData;
+       const url = 'http://localhost:3000/getDataBase';
 
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+       function sendRequest(methode, url, body = null){
+        const proxyurl = "https://cors-anywhere.herokuapp.com/"; 
+        const reqURL=proxyurl+url;
+        return fetch(url).then(response => {
+          return response.json();
+        });
+       }
 
-      function drawChart() {
-        let data = google.visualization.arrayToDataTable([
-          ['Time', 'Passed', 'Failed'],
-          ['2004',  2000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+      sendRequest('GET', url)
+        .then(data => {
+          jsonData=data;
+          console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
+          console.log(jsonData);
 
-        let options = {
-          title: 'Performance Chart',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
+          //deleteS
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
 
-        let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+          function drawChart() {
 
-        chart.draw(data, options);
-      }
+            let data = google.visualization.arrayToDataTable([
+             ['Task', 'Duration'],
+             ['Passed',     11],
+             ['Failed',    7]
+             ]);
+
+           let options = {
+            title: 'Performance Chart'
+           };
+
+           let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+           chart.draw(data, options);
+          }
+         //deleteE
+      } )
+        .catch(err => console.log(err))
+
+      console.log('HTML run');
+      
+
+      
     </script>
-   <title>Course</title>
+   <title>Performance Tool</title>
 </head>
 
 <body class="text-center">
@@ -50,12 +73,16 @@
     
     <button class="btn btn-lg btn-primary btn-block" type="submit">Run</button>
     <button class="btn btn-lg btn-primary btn-block" type="submit" name="stop" value="false">Stop</button>
-    
   </form>
 
+  
+  
 
 <div class="mallbery-ext-normal" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div><div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div>
-<div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+<div id="piechart" style="width: 1500px; height: 500px;"></div>
+
+
 <p class="mt-5 mb-3 text-muted">© 2020-2022</p>
 </body>
 </html>

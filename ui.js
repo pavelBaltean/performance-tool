@@ -2,15 +2,11 @@ let express = require('express');
 let app=express();
 let server=require('http').createServer(app);
 let bodyParser = require('body-parser');
-const mysql = require("mysql2");
-let requestOnLink=require('./fackingWork.js');
-
+let dbWork=require('./dataBase.js');
+const mysql=require("mysql2");
 
 server.listen(3000);
 
-
-
-//interface start
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.get('/run',function(req,res){
@@ -21,7 +17,6 @@ app.get('/run',function(req,res){
     let url;
     let latency;
     let duration;
-    let stopButton;
     if(!request.body) return response.sendStatus(400);
 
     console.log("START");
@@ -31,23 +26,42 @@ app.get('/run',function(req,res){
     url=request.body.url;
     latency=request.body.latency;
     duration=request.body.duration;
-// повторить с интервалом 2 секунды
-    let timerId = setInterval(() =>  requestOnLink(url), latency*1000);
-// остановить вывод через 5 секунд
 
+    let timerId = setInterval(() =>  dbWork.reqOnLinkSaveDB(url), latency*1000);
   setTimeout(() => { clearInterval(timerId); console.log("STOP");
-  let requestOnLink=require('./db.js');//надо убрать
  }, duration*1000);
- 
- 
-   //получение бд
 
-   // response.sendFile(__dirname + '/sucRegister.html'); типо график
+ //послать duration в график или он будет получать duration из HTML 
   });
-//interface end
 
-app.get('/graph',function(req,res){
-  res.sendFile(__dirname + '/graph.html');
+  
+
+app.get('/getDataBase',function(req,res){
+  console.log("getDataBase works");
+
+  const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    database: "mybase",
+    password: "root"
+  });
+  
+  connection.connect(function(err){
+    if (err) {
+      return console.error("Error: " + err.message);
+    }
+    else{
+      console.log("Database is connected");
+    }
+  });
+  //правильно закрыть базу
+  connection.query("SELECT * FROM user",
+  function(err, results, fields) { 
+    console.log(err);
+    res.json(results);
+    console.log(results);
+   });
+
 });
 
 
