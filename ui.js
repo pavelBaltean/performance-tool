@@ -4,6 +4,7 @@ let server=require('http').createServer(app);
 let bodyParser = require('body-parser');
 let dbWork=require('./dataBase.js');
 const mysql=require("mysql2");
+let path = require('path'); 
 
 server.listen(3000);
 
@@ -13,21 +14,36 @@ app.get('/',function(req,res){
     res.sendFile(__dirname + '/run.html');
   
   });
+
   
+
   app.post("/run", urlencodedParser, function (request, response) {
-  
     let url;
     let latency;
     let duration;
     if(!request.body) return response.sendStatus(400);
 
+    url=request.body.url;
+    latency=request.body.latency;
+    duration=request.body.duration;
+
+    // var options = {
+    //   headers: {
+    //       'x-timestamp': Date.now(),
+    //       'x-sent': true,
+    //       'name': 'MattDionis',
+    //       'origin':'stackoverflow' 
+    //   }
+    // };
+
+
+    response.sendFile(path.join(__dirname, '/public', 'wait.html'), duration);
+
     console.log("START");
     console.log("");
     console.log(request.body);
   
-    url=request.body.url;
-    latency=request.body.latency;
-    duration=request.body.duration;
+  
 
     let timerId = setInterval(() =>  dbWork.reqOnLinkSaveDB(url), latency*1000);
   setTimeout(() => { clearInterval(timerId); console.log("STOP");
