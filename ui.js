@@ -33,7 +33,6 @@ app.get('/',function(req,res){
   setTimeout(() => { clearInterval(timerId); console.log("STOP");
  }, duration*1000);
 
- //послать duration в график или он будет получать duration из HTML 
   });
 
   
@@ -66,7 +65,7 @@ app.get('/getDataBase',function(req,res){
     //   res.json(resTime);
     //   console.log(resTime);
     // });
-    console.log(rows[0].url);
+   
     res.json(rows);
   });
 

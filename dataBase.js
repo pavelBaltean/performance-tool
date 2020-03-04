@@ -28,6 +28,11 @@ function reqOnLinkSaveDB(reqURL){
      url : reqURL,
      time : true
    },function(err, response){
+      let today = new Date();
+      let time = [today.getHours() ,  today.getMinutes() , today.getSeconds()];
+      let myTimeString = JSON.stringify(time)
+      
+
       let resElapsedTime;
       let resStatusCode;
       let resStatusMessage;
@@ -41,14 +46,14 @@ function reqOnLinkSaveDB(reqURL){
         resStatusCode=response.statusCode;
         resStatusMessage=response.statusMessage;
        }
-
+     console.log('Current time in array: ',myTimeString);
      console.log('Request time in ms', resElapsedTime);
      console.log('Status code: ',resStatusCode);
      console.log('Status Message:',resStatusMessage);
      
   
-     const user=[ reqURL+"",resStatusCode,resStatusMessage+"",resElapsedTime];
-     const sql="INSERT INTO user (url,statusCode,statusMessage,responseTime) VALUES (?,?,?,?)";
+     const user=[ myTimeString,reqURL+"",resStatusCode,resStatusMessage+"",resElapsedTime];
+     const sql="INSERT INTO user (requestTime,url,statusCode,statusMessage,responseTime) VALUES (?,?,?,?,?)";
      
      connection.query(sql, user, function(err, results) {
          if(err) console.log(err);

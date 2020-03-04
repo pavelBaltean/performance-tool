@@ -15,7 +15,7 @@
 // .then(data => console.log(data))
 // .catch(err => console.log(err));
 
-var activities = [[0,0]];
+var activities = [];
 
 
 
