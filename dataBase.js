@@ -14,11 +14,11 @@ connection.connect(function(err){
     return console.error("Error: " + err.message);
   }
   else{
-    // let sql = "CREATE TABLE url (name VARCHAR(255), address VARCHAR(255))";
-    // connection.query(sql, function (err, result) {
-    //   if (err) throw err;
-    //   console.log("Table created");
-    // });
+    let sql = "TRUNCATE TABLE user;";
+    connection.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("Table Truncated");
+    });
     console.log("Database is connected");
   }
 });
@@ -59,6 +59,15 @@ function reqOnLinkSaveDB(reqURL){
 
 }
 
+function truncateDataBase(){
+  let sql = "TRUNCATE TABLE user;";
+    connection.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("Table Truncated");
+    });
+}
+
+
 function getDataBase(){
   connection.query('SELECT * FROM user', (err,rows) => {
     if(err) throw err;
@@ -73,7 +82,8 @@ function getDataBase(){
 
 module.exports={
  reqOnLinkSaveDB,
-  getDataBase
+  getDataBase,
+  truncateDataBase
 }
 
 

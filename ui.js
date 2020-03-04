@@ -18,6 +18,9 @@ app.get('/',function(req,res){
   
 
   app.post("/run", urlencodedParser, function (request, response) {
+
+   // dbWork.truncateDataBase();
+
     let url;
     let latency;
     let duration;
@@ -27,17 +30,12 @@ app.get('/',function(req,res){
     latency=request.body.latency;
     duration=request.body.duration;
 
-    // var options = {
-    //   headers: {
-    //       'x-timestamp': Date.now(),
-    //       'x-sent': true,
-    //       'name': 'MattDionis',
-    //       'origin':'stackoverflow' 
-    //   }
-    // };
+   response.send(`Performance Test start ,wait : ${duration} sec . After go back`);
 
 
-    response.sendFile(path.join(__dirname, '/public', 'wait.html'), duration);
+
+    //it is for wait.html
+    //response.sendFile(path.join(__dirname, '/public', 'wait.html'), duration);
 
     console.log("START");
     console.log("");

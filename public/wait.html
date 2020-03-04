@@ -2,9 +2,22 @@
     <body>
     <p>You will be redirected in 3 seconds</p>
     <script>
-        var timer = setTimeout(function() {
-            window.location='http://localhost:3000/lineChart'
-        }, 20000);
+        const url = 'http://localhost:3000/run';
+
+        function sendRequest(methode, url, body = null){
+        const proxyurl = "https://cors-anywhere.herokuapp.com/"; 
+        const reqURL=proxyurl+url;
+        return fetch(url).then(response => {
+        return response.json();
+            });
+        }   sendRequest('GET', url)
+        .then(data => {
+            console.log("Heiiiiiiiiiiiiiiiiiiiiiii");} )
+        .catch(err => console.log(err))
+
+        // let timer = setTimeout(function() {
+        //     window.location='http://localhost:3000/lineChart'
+        // }, 20000);
     </script>
 </body>
 </html>
