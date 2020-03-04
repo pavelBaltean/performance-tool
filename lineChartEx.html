@@ -20,7 +20,7 @@
           let resTimeP=0;
           let resTimeF=0;
           let id=0;
-          let reqTime=[];
+          let reqTime;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
          
           jsonData=data;
@@ -36,12 +36,13 @@
             }else{
               resTimeF=parseInt(`${jsonData.responseTime}`);
             }
+            console.log(resTimeF);
             id=parseInt(`${jsonData.id}`);
-            reqTime=JSON.parse(`${jsonData.requestTime}`);
-            arJson.push([reqTime,resTimeP,resTimeF]);
+            reqTime=`${jsonData.requestTime}`;
+            arJson.push([new Date(reqTime),resTimeP,resTimeF]);
 
           });
-         console.log(arJson);
+        
       //line chart Start
       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
@@ -53,13 +54,7 @@
       data.addColumn('number', 'Passed');
       data.addColumn('number', 'Failed');
       
-      
-  let d='2020-03-04T19:26:20.719Z';
-  let d2 ='2020-03-04T19:27:20.719Z';
-      data.addRows([
-        [new Date(d),2,3],
-        [new Date(d2),3,4]
-    ]);
+      data.addRows(arJson);
 
       var options = {
         chart: {
@@ -68,9 +63,9 @@
         },
         width: 900,
         height: 500,
-         hAxis: {
-           format: 'HH:mm:ss'
-         }
+        // hAxis: {
+        //   format: 'HH:mm:ss'
+        // }
       };
 
       var chart = new google.charts.Line(document.getElementById('linechart_material'));

@@ -72,7 +72,7 @@ app.get('/getDataBase',function(req,res){
 });
 
 app.get('/graph',function(req,res){
-  res.sendFile(__dirname + '/lineChartEx.html');
+  res.sendFile(__dirname + '/lineChart.html');
 
 });
 

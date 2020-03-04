@@ -16,11 +16,8 @@
 
        sendRequest('GET', url)
         .then(data => {
-          let idDataPassed;
-          let resTimeP=0;
-          let resTimeF=0;
-          let id=0;
-          let reqTime=[];
+          let resTime=0;
+          let reqTime;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
          
           jsonData=data;
@@ -28,20 +25,12 @@
            let arJson=[];
            
           jsonData.forEach( (jsonData) => {
-    
-            idDataPassed=`${jsonData.statusCode}`;
-            //добавить другие status code
-            if(idDataPassed==200){ 
-              resTimeP=parseInt(`${jsonData.responseTime}`);              
-            }else{
-              resTimeF=parseInt(`${jsonData.responseTime}`);
-            }
-            id=parseInt(`${jsonData.id}`);
-            reqTime=JSON.parse(`${jsonData.requestTime}`);
-            arJson.push([reqTime,resTimeP,resTimeF]);
+            resTime=parseInt(`${jsonData.responseTime}`);   
+            reqTime=`${jsonData.requestTime}`;
+            arJson.push([new Date(reqTime),resTime]);
 
           });
-         console.log(arJson);
+        
       //line chart Start
       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
@@ -49,9 +38,9 @@
     function drawChart() {
 
       var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', 'Time');
-      data.addColumn('number', 'Passed');
-      data.addColumn('number', 'Failed');
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'Response Time (ms)');
+     
       
       data.addRows(arJson);
 
