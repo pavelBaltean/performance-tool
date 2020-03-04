@@ -16,10 +16,7 @@
 
        sendRequest('GET', url)
         .then(data => {
-          let idDataPassed;
-          let resTimeP=0;
-          let resTimeF=0;
-          let id=0;
+          let resTime=0;
           let reqTime;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
          
@@ -28,18 +25,9 @@
            let arJson=[];
            
           jsonData.forEach( (jsonData) => {
-    
-            idDataPassed=`${jsonData.statusCode}`;
-            //добавить другие status code
-            if(idDataPassed==200){ 
-              resTimeP=parseInt(`${jsonData.responseTime}`);              
-            }else{
-              resTimeF=parseInt(`${jsonData.responseTime}`);
-            }
-            console.log(resTimeF);
-            id=parseInt(`${jsonData.id}`);
+            resTime=parseInt(`${jsonData.responseTime}`);   
             reqTime=`${jsonData.requestTime}`;
-            arJson.push([new Date(reqTime),resTimeP,resTimeF]);
+            arJson.push([new Date(reqTime),resTime]);
 
           });
         
@@ -51,15 +39,15 @@
 
       var data = new google.visualization.DataTable();
       data.addColumn('datetime', 'Time');
-      data.addColumn('number', 'Passed');
-      data.addColumn('number', 'Failed');
+      data.addColumn('number', 'Response Time (ms)');
+     
       
       data.addRows(arJson);
 
       var options = {
         chart: {
-          title: 'Box Office Earnings in First Two Weeks of Opening',
-          subtitle: 'in millions of dollars (USD)'
+          title: 'Performance Chart',
+          subtitle: 'Response Time '
         },
         width: 900,
         height: 500,

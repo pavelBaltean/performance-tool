@@ -71,10 +71,15 @@ app.get('/getDataBase',function(req,res){
 
 });
 
-app.get('/graph',function(req,res){
+app.get('/lineChart',function(req,res){
   res.sendFile(__dirname + '/lineChart.html');
-
 });
+
+app.get('/pieChart',function(req,res){
+  res.sendFile(__dirname + '/pieChart.html');
+});
+
+
 
 
 

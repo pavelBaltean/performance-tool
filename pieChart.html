@@ -22,10 +22,8 @@
       sendRequest('GET', url)
         .then(data => {
           let idDataPassed;
-          let idDataFailed;
           let countP=0;
           let countF=0;
-          let avPasResTime=0;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
          
           jsonData=data;
@@ -33,9 +31,7 @@
 let ar = [['Task', 'Duration']];
           jsonData.forEach( (jsonData) => {
             idDataPassed=`${jsonData.statusCode}`;
-            //добавить другие status code
             if(idDataPassed==200){ 
-              avPasResTime+=`${jsonData.responseTime}`;
               countP++;
             }else{
               countF++;
@@ -73,6 +69,12 @@ let ar = [['Task', 'Duration']];
 
 <div id="piechart" style="width: 1500px; height: 500px;"></div>
 
-<a href="/">Home</a>
+<form class="form-signin" action="/lineChart" method="get">
+  <button class="btn btn-lg btn-primary btn-block"  type="submit" name="lineChart" value="false">Line Chart</button>
+  </form>
+
+<form class="form-signin" action="/" method="get">
+  <button class="btn btn-lg btn-primary btn-block"  type="submit" name="home" value="false">Home</button>
+  </form>
 </body>
 </html>
