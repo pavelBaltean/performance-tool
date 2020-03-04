@@ -15,6 +15,7 @@ app.get('/',function(req,res){
   });
   
   app.post("/run", urlencodedParser, function (request, response) {
+  
     let url;
     let latency;
     let duration;
@@ -65,9 +66,14 @@ app.get('/getDataBase',function(req,res){
     //   res.json(resTime);
     //   console.log(resTime);
     // });
+    console.log(rows[0].url);
     res.json(rows);
   });
 
+});
+
+app.get('/graph',function(req,res){
+  res.sendFile(__dirname + '/lineChart.html');
 
 });
 

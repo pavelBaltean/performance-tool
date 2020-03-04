@@ -21,68 +21,58 @@
 
       sendRequest('GET', url)
         .then(data => {
-          jsonData=data;
+          let idDataPassed;
+          let idDataFailed;
+          let countP=0;
+          let countF=0;
+          let avPasResTime=0;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
-          console.log(jsonData);
-
-          //deleteS
+         
+          jsonData=data;
+          
+let ar = [['Task', 'Duration']];
+          jsonData.forEach( (jsonData) => {
+            idDataPassed=`${jsonData.statusCode}`;
+            //добавить другие status code
+            if(idDataPassed==200){ 
+              avPasResTime+=`${jsonData.responseTime}`;
+              countP++;
+            }else{
+              countF++;
+            }
+          });
+          ar.push(['Passed',countP]);
+          ar.push(['Failed',countF]);
+            console.log(ar);
           google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
-
+          
           function drawChart() {
 
-            let data = google.visualization.arrayToDataTable([
-             ['Task', 'Duration'],
-             ['Passed',     11],
-             ['Failed',    7]
-             ]);
+            let data = google.visualization.arrayToDataTable(ar);
 
            let options = {
-            title: 'Performance Chart'
+            title: 'Performance Chart',
            };
 
            let chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
            chart.draw(data, options);
-          }
-         //deleteE
+          } 
+          
+          
       } )
         .catch(err => console.log(err))
 
-      console.log('HTML run');
-      
-
-      
     </script>
-   <title>Performance Tool</title>
+
+   <title>Performance Chart</title>
 </head>
 
-<body class="text-center">
-  <div class="mallbery-ext-install" style="z-index: 2147483647 !important; text-transform: none !important;">
-  </div>
-  
-  <form class="form-signin" action="/run" method="post">
-    <!-- Import image here -->
-    <h1 class="h3 mb-3 font-weight-normal">Performance Tool</h1>
-    <label for="url" class="sr-only">URL</label>
-    <input type="url" name="url" id="url"  placeholder="https://example.com"  pattern="https://.*" size="30"  required="" autofocus="">
-    <label for="latency" class="sr-only">Latency(sec)</label>
-    <input type="number" id="latency" name="latency" min="1" max="10000" required="">
-    <label for="duration" class="sr-only">Duration(sec)</label>
-    <input type="number" id="duration" name="duration" min="1" max="10000" required="">
-    
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Run</button>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="stop" value="false">Stop</button>
-  </form>
-
-  
-  
-
-<div class="mallbery-ext-normal" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div><div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div>
+<body class="text-center"> 
 
 <div id="piechart" style="width: 1500px; height: 500px;"></div>
 
-
-<p class="mt-5 mb-3 text-muted">© 2020-2022</p>
+<a href="/">Home</a>
 </body>
 </html>
