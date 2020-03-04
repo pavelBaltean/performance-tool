@@ -29,9 +29,12 @@ function reqOnLinkSaveDB(reqURL){
      time : true
    },function(err, response){
       let today = new Date();
-      let time = [today.getHours() ,  today.getMinutes() , today.getSeconds()];
+      // let hours = today.getHours();
+      // hours = hours % 12;
+      // //hours = hours ? hours : 12; // the hour '0' should be '12'
+      // let changedTime=hours-13;
+      let time = [today.getHours(),  today.getMinutes() , today.getSeconds()];
       let myTimeString = JSON.stringify(time)
-      
 
       let resElapsedTime;
       let resStatusCode;

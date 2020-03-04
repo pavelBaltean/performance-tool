@@ -20,15 +20,15 @@
           let resTimeP=0;
           let resTimeF=0;
           let id=0;
+          let reqTime=[];
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
          
           jsonData=data;
           
-           let arJson=[ 
-             [0,0,0]
-           ];
+           let arJson=[];
+           
           jsonData.forEach( (jsonData) => {
-          
+    
             idDataPassed=`${jsonData.statusCode}`;
             //добавить другие status code
             if(idDataPassed==200){ 
@@ -37,7 +37,8 @@
               resTimeF=parseInt(`${jsonData.responseTime}`);
             }
             id=parseInt(`${jsonData.id}`);
-            arJson.push([id,resTimeP,resTimeF]);
+            reqTime=JSON.parse(`${jsonData.requestTime}`);
+            arJson.push([reqTime,resTimeP,resTimeF]);
 
           });
          console.log(arJson);
@@ -48,11 +49,17 @@
     function drawChart() {
 
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Time');
+      data.addColumn('datetime', 'Time');
       data.addColumn('number', 'Passed');
       data.addColumn('number', 'Failed');
       
-      data.addRows(arJson);
+      
+  let d='2020-03-04T19:26:20.719Z';
+  let d2 ='2020-03-04T19:27:20.719Z';
+      data.addRows([
+        [new Date(d),2,3],
+        [new Date(d2),3,4]
+    ]);
 
       var options = {
         chart: {
@@ -60,7 +67,10 @@
           subtitle: 'in millions of dollars (USD)'
         },
         width: 900,
-        height: 500
+        height: 500,
+         hAxis: {
+           format: 'HH:mm:ss'
+         }
       };
 
       var chart = new google.charts.Line(document.getElementById('linechart_material'));
