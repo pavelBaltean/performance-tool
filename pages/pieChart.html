@@ -22,7 +22,7 @@
 
     sendRequest('GET', url)
       .then(data => {
-        let idDataPassed;
+        let statusCodeRes;
         let countP = 0;
         let countF = 0;
         console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
@@ -39,10 +39,10 @@
           let ar = [['Task', 'Duration']];
 
           jsonData.forEach((jsonData) => {
-            idDataPassed = `${jsonData.statusCode}`;
-            if (idDataPassed == 200) {
+            statusCodeRes = `${jsonData.statusCode}`;
+            if (statusCodeRes >= 200 && statusCodeRes<=299) {
               countP++;
-            } else {
+            } else  {
               countF++;
             }
           });
