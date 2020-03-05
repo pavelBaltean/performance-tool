@@ -28,7 +28,7 @@ app.get('/',function(req,res){
     latency=request.body.latency;
     duration=request.body.duration;
 
-    response.send(`Performance Test start ,wait : ${duration} sec. After go back`);
+    response.sendFile(__dirname + '/wait.html');
 
     //it is for wait.html
     //response.sendFile(path.join(__dirname, '/public', 'wait.html'), duration);
