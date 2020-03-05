@@ -10,14 +10,14 @@ Steps to run Performance Tool
 
 1.Create mysql database
   1.1)CREATE DATABASE mybase;
-  1.2)CREATE TABLE user(
-      id INT NOT NULL AUTO_INCREMENT,
-      requestTime VARCHAR(300) NOT NULL,
-      url VARCHAR(500) NOT NULL,
-      statusMessage INT NOT NULL,
+  1.2)CREATE TABLE user( 
+      id INT NOT NULL AUTO_INCREMENT, 
+      requestTime VARCHAR(300) NOT NULL, 
+      url VARCHAR(500) NOT NULL, 
+      statusCode INT NOT NULL, 
+      statusMessage VARCHAR(128) NOT NULL, 
       responseTime INT NOT NULL,
-      PRIMARY KEY (id)
-      );
+      PRIMARY KEY (id) );
 
 2.Run app.js
   2.1)node app
