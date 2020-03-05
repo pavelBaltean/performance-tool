@@ -4,7 +4,7 @@ let server=require('http').createServer(app);
 let bodyParser = require('body-parser');
 let dbWork=require('./dataBase.js');
 const mysql=require("mysql2");
-let path = require('path'); 
+//let path = require('path'); for wait html
 
 server.listen(3000);
 
@@ -18,21 +18,17 @@ app.get('/',function(req,res){
   
 
   app.post("/run", urlencodedParser, function (request, response) {
-
-    
-
     let url;
     let latency;
     let duration;
+    dbWork.truncateDataBase();
     if(!request.body) return response.sendStatus(400);
 
     url=request.body.url;
     latency=request.body.latency;
     duration=request.body.duration;
 
-   response.send(`Performance Test start ,wait : ${duration} sec . After go back`);
-
-
+    response.send(`Performance Test start ,wait : ${duration} sec. After go back`);
 
     //it is for wait.html
     //response.sendFile(path.join(__dirname, '/public', 'wait.html'), duration);
@@ -41,12 +37,9 @@ app.get('/',function(req,res){
     console.log("");
     console.log(request.body);
  
- 
     let timerId = setInterval(() => dbWork.reqOnLinkSaveDB(url), latency*1000);
-  setTimeout(() => { clearInterval(timerId); console.log("STOP");
- }, duration*1000);
-   
-
+  setTimeout(() => { clearInterval(timerId); console.log("STOP");}, duration*1000);
+  
   });
 
   

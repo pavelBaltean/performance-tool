@@ -51,7 +51,7 @@ function reqOnLinkSaveDB(reqURL){
      connection.query(sql, user, function(err, results) {
          if(err) console.log(err);
          else {
-          console.log('Current time in array: ',today);
+          console.log('Current Date&Time: ',today);
           console.log('Request time in ms', resElapsedTime);
           console.log('Status code: ',resStatusCode);
           console.log('Status Message:',resStatusMessage);
