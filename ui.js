@@ -19,7 +19,7 @@ app.get('/',function(req,res){
 
   app.post("/run", urlencodedParser, function (request, response) {
 
-   // dbWork.truncateDataBase();
+    
 
     let url;
     let latency;
@@ -40,12 +40,12 @@ app.get('/',function(req,res){
     console.log("START");
     console.log("");
     console.log(request.body);
-  
-  
-
-    let timerId = setInterval(() =>  dbWork.reqOnLinkSaveDB(url), latency*1000);
+ 
+ 
+    let timerId = setInterval(() => dbWork.reqOnLinkSaveDB(url), latency*1000);
   setTimeout(() => { clearInterval(timerId); console.log("STOP");
  }, duration*1000);
+   
 
   });
 

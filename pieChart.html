@@ -25,10 +25,18 @@
           let countP=0;
           let countF=0;
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
-         
-          jsonData=data;
           
-let ar = [['Task', 'Duration']];
+          jsonData=data;
+
+          if(jsonData==0){
+            alert("You should run test");
+
+          }else{
+
+          console.log(jsonData);
+
+          let ar = [['Task', 'Duration']];
+
           jsonData.forEach( (jsonData) => {
             idDataPassed=`${jsonData.statusCode}`;
             if(idDataPassed==200){ 
@@ -39,7 +47,7 @@ let ar = [['Task', 'Duration']];
           });
           ar.push(['Passed',countP]);
           ar.push(['Failed',countF]);
-            console.log(ar);
+           
           google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
           
@@ -55,7 +63,7 @@ let ar = [['Task', 'Duration']];
 
            chart.draw(data, options);
           } 
-          
+          }
           
       } )
         .catch(err => console.log(err))

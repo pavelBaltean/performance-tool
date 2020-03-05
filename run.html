@@ -19,17 +19,17 @@
     <label for="url" class="sr-only">URL</label>
     <input type="url" name="url" id="url"  placeholder="https://example.com"  pattern="https://.*" size="30"  required="" autofocus="">
     <label for="latency" class="sr-only">Latency(sec)</label>
-    <input type="number" id="latency" name="latency" min="1" max="10000" required="">
+    <input type="number" id="latency" name="latency" min="1" max="19000" required="">
     <label for="duration" class="sr-only">Duration(sec)</label>
     <input type="number" id="duration" name="duration" min="1" max="10000" required="">
     
     <button class="btn btn-lg btn-primary btn-block" type="submit">Run</button>
   </form>
-
+   <p> </p>
   <form class="form-signin" action="/lineChart" method="get">
   <button class="btn btn-lg btn-primary btn-block"  type="submit" name="lineChart" value="false">Line Chart</button>
   </form>
-
+  <p> </p>
 
   <form class="form-signin" action="/pieChart" method="get">
     <button class="btn btn-lg btn-primary btn-block"  type="submit" name="pieChart" value="false">Pie Chart</button>
