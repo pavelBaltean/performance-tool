@@ -30,7 +30,7 @@
             arJson.push([new Date(reqTime),resTime]);
 
           });
-        
+        console.log(arJson);
       //line chart Start
       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
@@ -51,17 +51,29 @@
         },
         width: 900,
         height: 500,
-        // hAxis: {
-        //   format: 'HH:mm:ss'
-        // }
+        hAxis: {
+          format: 'HH:mm:ss'
+        }
       };
 
       var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
-      chart.draw(data, google.charts.Line.convertOptions(options));
+      
+    //   google.visualization.events.addListener(chart, 'error', function (err) {
+    //   // check error
+    //   console.log(err.id, err.message);
+
+    //   // remove error
+    //   google.visualization.errors.removeError(err.id);
+
+    //   // remove all errors
+    //   google.visualization.errors.removeAll(container);
+    // });
+    chart.draw(data, google.charts.Line.convertOptions(options));
+      
     }
     //line chart End
-           }
+    }
   } )
         .catch(err => console.log(err))
 

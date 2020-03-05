@@ -42,10 +42,7 @@ function reqOnLinkSaveDB(reqURL){
         resStatusCode=response.statusCode;
         resStatusMessage=response.statusMessage;
        }
-     console.log('Current time in array: ',today);
-     console.log('Request time in ms', resElapsedTime);
-     console.log('Status code: ',resStatusCode);
-     console.log('Status Message:',resStatusMessage);
+     
      
   
      const user=[ today+'',reqURL+"",resStatusCode,resStatusMessage+"",resElapsedTime];
@@ -53,7 +50,13 @@ function reqOnLinkSaveDB(reqURL){
      
      connection.query(sql, user, function(err, results) {
          if(err) console.log(err);
-         else console.log("Data added\n");
+         else {
+          console.log('Current time in array: ',today);
+          console.log('Request time in ms', resElapsedTime);
+          console.log('Status code: ',resStatusCode);
+          console.log('Status Message:',resStatusMessage);
+           console.log("Data added\n");
+          };
      });
    });
 

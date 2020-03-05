@@ -41,8 +41,12 @@
       data.addColumn('datetime', 'Time');
       data.addColumn('number', 'Response Time (ms)');
      
-      
-      data.addRows(arJson);
+      let d1='Thu Mar 05 2020 17:30:26 GMT+0200 (Eastern European Standard Time)';
+      let d2='Thu Mar 05 2020 17:30:26 GMT+0200 (Eastern European Standard Time)';
+      data.addRows([
+        [new Date(d1),20],
+        [new Date(d2),30]
+      ]);
 
       var options = {
         chart: {
