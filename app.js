@@ -5,7 +5,6 @@ let bodyParser = require("body-parser");
 let dbWork = require("./dataBase.js");
 const mysql = require("mysql2");
 //let path = require('path'); for wait html
-//new
 server.listen(3000);
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });

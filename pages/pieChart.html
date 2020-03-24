@@ -13,8 +13,8 @@
     const url = 'http://localhost:3000/getDataBase';
 
     function sendRequest(methode, url, body = null) {
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
-      const reqURL = proxyurl + url;
+      //const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      //const reqURL = proxyurl + url;
       return fetch(url).then(response => {
         return response.json();
       });
